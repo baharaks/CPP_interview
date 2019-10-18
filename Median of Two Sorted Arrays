@@ -1,0 +1,30 @@
+/*
+    Median of Two Sorted Arrays
+*/
+#include <bits/stdc++.h> 
+struct greaters { 
+    bool operator()(const long& a, const long& b) const
+    { 
+        return a < b; 
+    } 
+}; 
+class Solution {
+public:
+    
+    float findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int n = nums1.size();
+        int m = nums2.size();
+        float med;
+        vector<int> merg(n+m);
+        merge(nums1.begin(), nums1.end(), nums2.begin(), nums2.end(), merg.begin(), greaters());
+        //sort(merg.begin(), merg.end());
+        int N = merg.size();
+        if(N%2==0){
+            med = (merg.at(N/2-1) + merg.at(N/2))/2.0;
+        }else{
+            med = merg.at((N-1)/2);
+        }
+        return med;
+    }
+    
+};
